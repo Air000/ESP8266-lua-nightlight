@@ -5,7 +5,7 @@ print('MAC: ',wifi.sta.getmac())
 print('chip: ',node.chipid())
 print('heap: ',node.heap())
 -- wifi config start
-wifi.sta.config(“SSID”,”PASSWORD)
+wifi.sta.config("Terry3G","mcu909394")
 -- wifi config end
 print(wifi.sta.getip())
 tmr.alarm(0, 3000, 1, function()
@@ -17,5 +17,5 @@ tmr.alarm(0, 3000, 1, function()
       print(wifi.sta.getip())
       dofile("nightlight.lua")
    end
-end)
+end) 
 

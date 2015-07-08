@@ -2,8 +2,8 @@ hour = 0
 minute = 0
 second = 0
 lastUpdate = 1800
-nightPin = 4
-dayPin = 3
+nightPin = 0
+dayPin = 2
 gpio.mode(nightPin,gpio.OUTPUT)
 gpio.mode(dayPin,gpio.OUTPUT)
 
@@ -13,14 +13,14 @@ function getTime()
           conn=net.createConnection(net.TCP, 0) 
           conn:on("receive", function(conn, payload)
                time = string.sub(payload,string.find(payload,"Date: ")+23,string.find(payload,"Date: ")+31)
-               hour = string.sub(time, 0, 2) + 1
+               hour = string.sub(time, 0, 2) + 8
                minute = string.sub(time, 4,5) + 0
                second = string.sub(time, 7,9) + 0
                print(hour.."-"..minute.."-"..second)
                conn:close()
                lastUpdate = 0
                end) 
-          conn:dns('google.com',function(conn,ip) ipaddr=ip end)
+          conn:dns('baidu.com',function(conn,ip) ipaddr=ip end)
           conn:connect(80,ipaddr) 
           heap = node.heap()
           conn:send("HEAD / HTTP/1.1\r\n") 
@@ -49,10 +49,10 @@ tmr.alarm(1, 1000, 1, function()
      print(hour.."-"..minute.."-"..second..", "..lastUpdate)
      if hour>=7 and hour < 20 then
           gpio.write(nightPin,gpio.HIGH)
-          gpio.write(dayPin,gpio.LOW)
+          gpio.write(dayPin,gpio.HIGH)
      else 
           gpio.write(nightPin,gpio.LOW)
-          gpio.write(dayPin,gpio.HIGH)
+          gpio.write(dayPin,gpio.LOW)
      end
 end)
 tmr.alarm(0, 3000, 1, function()
