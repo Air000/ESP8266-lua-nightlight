@@ -47,7 +47,7 @@ end
 tmr.alarm(1, 1000, 1, function() 
      increaseTime()
      print(hour.."-"..minute.."-"..second..", "..lastUpdate)
-     if hour>=7 and hour < 20 then
+     if hour>=7 and hour < 18 then
           gpio.write(nightPin,gpio.HIGH)
           gpio.write(dayPin,gpio.HIGH)
      else 
